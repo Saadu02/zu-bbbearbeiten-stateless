@@ -4,13 +4,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    items = helper.get_all()
-    return render_template('index.html', items=items)
+    todos = helper.get_all()
+    return render_template('index.html', items=todos)
 
 
 @app.route('/add', methods=["POST"])
 def add():
-    text = request.form.get("text")
+    title = request.form.get("text")
     helper.add(text)
     return redirect(url_for("index"))
 
