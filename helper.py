@@ -1,26 +1,26 @@
 from dataclasses import dataclass
 
-todos = []
+items = []
 
 
 @dataclass
-class Todo:
+class Item:
     text: str
     isCompleted: bool = False
 
 
-def add(title):
+def add(text):
     text = text.replace('b', 'bbb').replace('B', 'Bbb')
-    todos.append(Todo(text))
+    items.append(Item(text))
 
 
 def get_all():
-    return todos
+    return items
 
 
 def get(index):
-    return todos[index]
+    return items[index]
 
 
 def update(index):
-    todos[index].isCompleted = not todos[index].isCompleted
+    items[index].isCompleted = not items[index].isCompleted
