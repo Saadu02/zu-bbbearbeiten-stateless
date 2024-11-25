@@ -24,12 +24,8 @@ def update(index):
 
 @app.route("/download")
 def download_csv():
-    data = [
-        {"title": "Meeting", "category": "Work", "description": "Weekly meeting"},
-        {"title": "Shopping", "category": "Personal", "description": "Buy milk and bread"}
-    ]
     return Response(
-        get_csv(data),
+        helper.get_csv(),
         mimetype="text/csv",
-        headers={"Content-disposition": "attachment; filename=traktanden.csv"},
+        headers={"Content-disposition": "attachment; filename=zu-bbbearbeiten.csv"},
     )

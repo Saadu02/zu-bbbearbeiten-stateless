@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import datetime
-import  csv
-import io
+import csv
+from io import StringIO
 
 items = []
 
@@ -31,9 +31,12 @@ def update(index):
     items[index].isCompleted = not items[index].isCompleted
 
 
-def get_csv(data):
-    output = io.StringIO()
-    writer = csv.DictWriter(output, fieldnames=["title", "category", "description"])
-    writer.writeheader()
-    writer.writerows(data)
+def get_csv():
+    output = StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["Text", "Date", "Completed"])  # Header
+
+    for item in items:
+        writer.writerow([item.text, item.date, item.isCompleted])
+
     return output.getvalue()

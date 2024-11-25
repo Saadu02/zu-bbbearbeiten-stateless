@@ -16,11 +16,15 @@ def test_add():
     assert isinstance(item.date, datetime.date)
 
 def test_get_csv():
-    data = [
-        {"title": "Meeting", "category": "Work", "description": "Weekly meeting"},
-        {"title": "Shopping", "category": "Personal", "description": "Buy milk and bread"}
-    ]
-    result = helper.get_csv(data)
-    expected = "title,category,description\nMeeting,Work,\"Weekly meeting\"\nShopping,Personal,\"Buy milk and bread\""
-    assert result == expected
+    # Given: Es gibt Traktanden
+    helper.add("Traktandum 1", "2024-11-25")
+    helper.add("Traktandum 2", "2024-11-26")
+
+    # When: Die CSV-Funktion aufgerufen wird
+    csv_result = helper.get_csv()
+
+    # Then: Die CSV-Daten enthalten die Traktanden im richtigen Format
+    assert "Traktandum 1,2024-11-25" in csv_result
+    assert "Traktandum 2,2024-11-26" in csv_result
+
 
