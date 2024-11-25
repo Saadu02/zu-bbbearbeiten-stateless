@@ -35,5 +35,7 @@ def get_csv(data):
     output = io.StringIO()
     writer = csv.DictWriter(output, fieldnames=["title", "category", "description"])
     writer.writeheader()
-    writer.writerows(data)
-    return output.getvalue()
+    for row in data:
+        writer.writerow(row)
+
+    return output.getvalue().replace('\r\n', '\n')

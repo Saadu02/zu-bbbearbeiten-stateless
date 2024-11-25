@@ -15,6 +15,7 @@ def test_add():
     item = helper.items[-1]
     assert isinstance(item.date, datetime.date)
 
+
 def test_get_csv():
     data = [
         {"title": "Meeting", "category": "Work", "description": "Weekly meeting"},
@@ -22,5 +23,6 @@ def test_get_csv():
     ]
     result = helper.get_csv(data)
     expected = "title,category,description\nMeeting,Work,\"Weekly meeting\"\nShopping,Personal,\"Buy milk and bread\""
+
     assert result == expected
 
