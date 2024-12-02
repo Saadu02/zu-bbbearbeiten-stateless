@@ -19,3 +19,30 @@ jobs:
         uses: ghalactic/github-release-from-tag@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  pyinstaller:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Run pyinstaller
+        run: |
+          pyinstaller -F --add-data "templates;templates" --add-data "helper.py;." main.py
+
+      - name: Upload executable
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.ref_name }} ./dist/main.exe
